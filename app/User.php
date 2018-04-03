@@ -10,10 +10,14 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function articles() {
+        return $this->hasMany('App\Article');
+    }
 }
