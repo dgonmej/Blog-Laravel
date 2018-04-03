@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
     Route::resource('users', 'UsersController', ['except' => 'show']);
+    Route::resource('categories', 'CategoriesController', ['except' => 'show']);
 });

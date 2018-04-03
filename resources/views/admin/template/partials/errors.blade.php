@@ -1,4 +1,4 @@
-@if(count($errors) > 0)
+@if($errors->any())
     <div class="alert alert-danger alert-block" role="alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <ul>
