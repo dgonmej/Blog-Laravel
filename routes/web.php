@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->group(function () {
+    Route::resource('users', 'UsersController', ['except' => 'show']);
+});
