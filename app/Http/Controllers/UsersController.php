@@ -18,6 +18,12 @@ class UsersController extends Controller
     }
     
     public function store(Request $request) {
+        $this->validate($request, [
+            'name'      => 'min:4|max:120|required',
+            'email'     => 'min:4|max:250|required|unique:users',
+            'password'  => 'min:4|max:20|required'
+        ]);
+
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->save();

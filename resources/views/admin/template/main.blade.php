@@ -9,19 +9,24 @@
 <body>
     @include('admin.template.partials.nav')
 
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <strong class="text-uppercase">@yield('title', 'Blog')</strong>
-            </div>
+    <section class="section-admin">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong class="text-uppercase">@yield('title', 'Blog')</strong>
+                </div>
 
-            <div class="panel-body">
-                @include('flash::message')
-                @yield('content')
+                <div class="panel-body">
+                    @include('flash::message')
+                    @include('admin.template.partials.errors')
+                    @yield('content')
+                </div>
             </div>
+            @include('admin.template.partials.footer')
         </div>
-        <div class="panel-footer">Todos los derechos reservados © 2017</div>
-    </div>
+    </section>
+
+
 
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
