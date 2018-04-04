@@ -5,40 +5,39 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('categories.index') }}">Categorías</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Artículos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Imágenes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Etiquetas</a>
-            </li>
+            @guest
+                <li class="nav-item active"><a class="nav-link" href="{{ url('/') }}">Inicio</a></li>
+            @else
+                <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('categories.index') }}">Categorías</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Artículos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Imágenes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Etiquetas</a></li>
+            @endguest
         </ul>
         <ul class="navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pagina principal</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Opciones
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Opción 1</a>
-                    <a class="dropdown-item" href="#">Opción 2</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Salir</a>
-                </div>
-            </li>
+            @guest
+                <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Iniciar sesión</a></li>
+                <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Registrarse</a></li>
+            @else
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+            
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a class="dropdown-item" href="#">Acción 1</a></li>
+                        <li><a class="dropdown-item" href="#">Acción 2</a></li>
+                        <li><div class="dropdown-divider"></div></li>
+                        <li>
+                            <a href="{{ route('logout') }}" class="dropdown-item" 
+                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar sesión
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                        </li>
+                    </ul>
+                </li>
+            @endguest
         </ul>
     </div>
 </nav>
